@@ -534,33 +534,78 @@ section h3 {
     background: var(--gris-claro);
 }
 
-.pricing-highlight {
-    background: linear-gradient(45deg, var(--azul-vino), var(--azul-claro));
-    color: var(--blanco);
-    padding: 2rem;
-    border-radius: 15px;
+.pricing-subtitle {
     text-align: center;
+    font-size: 1.2rem;
+    color: var(--gris-frio);
     margin-bottom: 3rem;
+    margin-top: -1rem;
+}
+
+.pricing-highlight {
+    background: linear-gradient(135deg, var(--azul-vino), var(--azul-claro));
+    color: var(--blanco);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-highlight::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+.offer-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.offer-label {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
+    margin-bottom: 4rem;
 }
 
 .pricing-card {
     background: var(--blanco);
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px var(--sombra);
+    border-radius: 25px;
+    box-shadow: 0 15px 35px var(--sombra);
     text-align: center;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
+    box-shadow: 0 25px 45px var(--sombra-hover);
 }
 
 .pricing-card.featured {
@@ -568,21 +613,42 @@ section h3 {
     border: 3px solid var(--azul-vino);
 }
 
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-15px);
+}
+
 .featured-badge {
     position: absolute;
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--azul-vino);
+    background: linear-gradient(45deg, var(--azul-vino), var(--azul-claro));
     color: var(--blanco);
-    padding: 0.5rem 1.5rem;
+    padding: 0.7rem 2rem;
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 1px solid var(--gris-claro);
+}
+
+.plan-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.plan-description {
+    color: var(--gris-frio);
+    font-size: 1rem;
+    margin-top: 0.5rem;
 }
 
 .price {
-    margin: 2rem 0;
+    padding: 2rem;
 }
 
 .currency {
@@ -591,7 +657,7 @@ section h3 {
 }
 
 .amount {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
     color: var(--azul-vino);
 }
@@ -600,29 +666,112 @@ section h3 {
     display: block;
     color: var(--gris-frio);
     margin-top: 0.5rem;
+    font-size: 1rem;
 }
 
 .contact {
     color: var(--azul-vino);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
-.pricing-card ul {
+.features-list {
     list-style: none;
     text-align: left;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
 }
 
-.pricing-card li {
-    padding: 0.5rem 0;
+.features-list li {
+    padding: 0.8rem 0;
     border-bottom: 1px solid var(--gris-claro);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.pricing-card li::before {
-    content: '✓';
-    color: var(--azul-vino);
+.features-list li:last-child {
+    border-bottom: none;
+}
+
+.check {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.card-footer {
+    padding: 2rem;
+}
+
+.plan-button {
+    display: inline-block;
+    background: var(--azul-vino);
+    color: var(--blanco);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
     font-weight: bold;
-    margin-right: 10px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.plan-button:hover {
+    background: var(--azul-noche);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.featured-button {
+    background: linear-gradient(45deg, var(--azul-vino), var(--azul-claro));
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.featured-button:hover {
+    background: linear-gradient(45deg, var(--azul-noche), var(--azul-vino));
+}
+
+.pricing-benefits {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.pricing-benefits h3 {
+    margin-bottom: 2rem;
+    color: var(--azul-oscuro);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-item {
+    background: var(--blanco);
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--sombra);
+    transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.benefit-item h4 {
+    color: var(--azul-vino);
+    margin-bottom: 0.5rem;
+}
+
+.benefit-item p {
+    color: var(--gris-frio);
+    font-size: 0.9rem;
 }
 
 /* Testimonials */
@@ -997,6 +1146,29 @@ section h3 {
     
     .pricing-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+        margin: 1rem 0;
+    }
+    
+    .pricing-card.featured:hover {
+        transform: translateY(-10px);
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .plan-icon {
+        font-size: 3rem;
+    }
+    
+    .offer-icon {
+        font-size: 3rem;
     }
     
     .testimonials-grid {
@@ -1005,6 +1177,22 @@ section h3 {
     
     .footer-links {
         grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-header {
+        padding: 1.5rem 1rem 1rem;
+    }
+    
+    .features-list {
+        padding: 0 1rem;
+    }
+    
+    .card-footer {
+        padding: 1.5rem 1rem;
     }
 }
 
