@@ -12,9 +12,9 @@
     <title>BusPay - Moderniza tu viaje con pago digital</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo.png">
-    <link rel="shortcut icon" type="image/png" href="assets/logo.png">
-    <link rel="apple-touch-icon" href="assets/logo.png">
+    <link rel="icon" type="image/png" href="assets/logo_blanco.png">
+    <link rel="shortcut icon" type="image/png" href="assets/logo_blanco.png">
+    <link rel="apple-touch-icon" href="assets/logo_blanco.png">
     
     <!-- Iconos profesionales -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -611,9 +611,17 @@ section h3 {
     opacity: 0.9;
 }
 
-/* Pricing */
+/* PRICING CON ANIMACIONES AVANZADAS Y AJUSTES */
 .pricing {
     background: var(--gris-claro);
+}
+
+.pricing h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--azul-oscuro);
+    animation: fadeInDown 0.8s ease;
 }
 
 .pricing-subtitle {
@@ -622,8 +630,10 @@ section h3 {
     color: var(--gris-frio);
     margin-bottom: 3rem;
     margin-top: -1rem;
+    animation: fadeInDown 0.8s ease 0.2s both;
 }
 
+/* Pricing Highlight con animaciones mejoradas y efectos reducidos */
 .pricing-highlight {
     background: linear-gradient(135deg, var(--azul-vino), var(--azul-claro));
     color: var(--blanco);
@@ -633,6 +643,9 @@ section h3 {
     margin-bottom: 4rem;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.8s ease 0.4s both;
 }
 
 .pricing-highlight::before {
@@ -645,11 +658,31 @@ section h3 {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     animation: pulse 4s infinite;
+    transition: all 0.3s ease;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.3; }
+.pricing-highlight:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-highlight:hover::before {
+    animation: pulse 2s infinite;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.pricing-highlight:hover .icon {
+    transform: rotate(180deg) scale(1.1); /* Reducido de 360deg */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Reducido el brillo */
+}
+
+.pricing-highlight:hover h3 {
+    transform: scale(1.05);
+}
+
+.pricing-highlight:hover .offer-label {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .offer-label {
@@ -661,8 +694,10 @@ section h3 {
     font-weight: bold;
     margin-top: 1rem;
     border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
+/* Grid de precios */
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -670,33 +705,73 @@ section h3 {
     margin-bottom: 4rem;
 }
 
+/* Cards de precios con animaciones avanzadas y efectos reducidos */
 .pricing-card {
     background: var(--blanco);
     border-radius: 25px;
     box-shadow: 0 15px 35px var(--sombra);
     text-align: center;
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
+    cursor: pointer;
+    animation: fadeInUp 0.8s ease both;
+}
+
+.pricing-card:nth-child(1) { animation-delay: 0.6s; }
+.pricing-card:nth-child(2) { animation-delay: 0.8s; }
+.pricing-card:nth-child(3) { animation-delay: 1s; }
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); /* Reducido de 0.4 a 0.2 */
+    transition: left 0.5s ease;
 }
 
 .pricing-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 45px var(--sombra-hover);
+    transform: translateY(-20px) scale(1.05);
+    box-shadow: 0 30px 60px var(--sombra-hover);
+    background: linear-gradient(135deg, var(--blanco), #f8f9ff);
 }
 
+.pricing-card:hover::before {
+    left: 100%;
+}
+
+/* Featured card especial con espaciado mejorado */
 .pricing-card.featured {
     transform: scale(1.05);
     border: 3px solid var(--azul-vino);
+    background: linear-gradient(135deg, var(--blanco), #f0f4ff);
 }
 
 .pricing-card.featured:hover {
-    transform: scale(1.05) translateY(-15px);
+    transform: scale(1.1) translateY(-25px);
+    border-color: var(--azul-claro);
+    box-shadow: 0 35px 70px var(--sombra-hover);
 }
 
+/* Ajustes para espaciado en la card "Más Popular" */
+.pricing-card.featured .card-header {
+    padding: 2.5rem 2rem 1rem; /* Más espacio arriba para el badge */
+    border-bottom: 1px solid var(--gris-claro);
+    transition: all 0.3s ease;
+}
+
+.pricing-card.featured .icon {
+    margin-top: 1rem; /* Espacio adicional entre el badge y el icono */
+    margin-bottom: 1rem;
+}
+
+/* Badge "Más Popular" con mejor posicionamiento */
 .featured-badge {
     position: absolute;
-    top: -15px;
+    top: -12px; /* Ajustado para mejor posición */
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(45deg, var(--azul-vino), var(--azul-claro));
@@ -706,6 +781,13 @@ section h3 {
     font-size: 0.9rem;
     font-weight: bold;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10; /* Asegurar que esté por encima */
+}
+
+.pricing-card.featured:hover .featured-badge {
+    transform: translateX(-50%) scale(1.1);
+    background: linear-gradient(45deg, var(--azul-claro), #8A2BE2);
 }
 
 .featured-badge::before {
@@ -713,32 +795,65 @@ section h3 {
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     margin-right: 0.5rem;
+    animation: sparkle 2s infinite;
 }
 
+/* Iconos con animaciones reducidas en pricing */
+.pricing-card:hover .icon {
+    transform: scale(1.1) rotateY(180deg); /* Reducido de 360deg a 180deg */
+    color: var(--azul-claro);
+    text-shadow: 0 0 5px rgba(107, 140, 174, 0.3); /* Reducido el brillo */
+}
+
+/* Headers de cards */
 .card-header {
     padding: 2rem 2rem 1rem;
     border-bottom: 1px solid var(--gris-claro);
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover .card-header {
+    border-bottom-color: var(--azul-vino);
 }
 
 .plan-description {
     color: var(--gris-frio);
     font-size: 1rem;
     margin-top: 0.5rem;
+    transition: all 0.3s ease;
 }
 
+.pricing-card:hover .plan-description {
+    color: var(--azul-vino);
+    transform: scale(1.05);
+}
+
+/* Precios con animaciones */
 .price {
     padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover .price {
+    transform: scale(1.1);
 }
 
 .currency {
     font-size: 1.5rem;
     vertical-align: top;
+    transition: all 0.3s ease;
 }
 
 .amount {
     font-size: 3.5rem;
     font-weight: bold;
     color: var(--azul-vino);
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover .amount {
+    color: var(--azul-claro);
+    text-shadow: 0 0 5px rgba(107, 140, 174, 0.2); /* Reducido el brillo */
 }
 
 .period {
@@ -746,14 +861,67 @@ section h3 {
     color: var(--gris-frio);
     margin-top: 0.5rem;
     font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
-.contact {
+.pricing-card:hover .period {
     color: var(--azul-vino);
+}
+
+/* Contact sin fondo */
+.contact {
+    color: var(--azul-vino) !important;
     font-size: 1.8rem;
     font-weight: bold;
+    transition: all 0.3s ease;
+    background: none !important; /* Quita cualquier fondo */
+    padding: 0 !important; /* Quita cualquier padding */
 }
 
+/* Asegurar que el h2 sea blanco */
+.contact h2 {
+    color: var(--blanco) !important;
+}
+
+/* Asegurar que el párrafo sea blanco */
+.contact p {
+    color: var(--blanco) !important;
+}
+
+/* Si hay algún override, forzar el background */
+#contacto {
+    background: var(--azul-oscuro) !important;
+}
+
+/* Para el contenedor también */
+.contact .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Asegurar que no haya conflictos con otros estilos */
+section.contact {
+    background: var(--azul-oscuro) !important;
+    background-color: var(--azul-oscuro) !important;
+}
+
+.pricing-card:hover .contact {
+    color: var(--azul-claro);
+    transform: scale(1.1);
+    background: none !important; /* Asegura que no tenga fondo en hover */
+}
+
+.price .contact {
+    background: transparent;
+    display: inline-block;
+}
+
+.contact i {
+    margin-right: 0.5rem;
+    background: none;
+}
+
+/* Features list con animaciones */
 .features-list {
     list-style: none;
     text-align: left;
@@ -767,7 +935,20 @@ section h3 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 0.3s ease;
+    transform: translateX(0);
 }
+
+.pricing-card:hover .features-list li {
+    transform: translateX(10px);
+    border-bottom-color: var(--azul-vino);
+}
+
+.pricing-card:hover .features-list li:nth-child(1) { transition-delay: 0.1s; }
+.pricing-card:hover .features-list li:nth-child(2) { transition-delay: 0.2s; }
+.pricing-card:hover .features-list li:nth-child(3) { transition-delay: 0.3s; }
+.pricing-card:hover .features-list li:nth-child(4) { transition-delay: 0.4s; }
+.pricing-card:hover .features-list li:nth-child(5) { transition-delay: 0.5s; }
 
 .features-list li:last-child {
     border-bottom: none;
@@ -780,8 +961,15 @@ section h3 {
     color: var(--azul-vino);
     font-size: 1.2rem;
     flex-shrink: 0;
+    transition: all 0.3s ease;
 }
 
+.pricing-card:hover .features-list li::before {
+    color: var(--azul-claro);
+    transform: scale(1.2);
+}
+
+/* Botones con efectos avanzados */
 .card-footer {
     padding: 2rem;
 }
@@ -794,33 +982,37 @@ section h3 {
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     width: 100%;
     text-align: center;
     position: relative;
     overflow: hidden;
+    transform: translateY(0);
 }
 
 .plan-button::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%);
 }
 
 .plan-button:hover {
     background: var(--azul-noche);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     color: var(--blanco);
 }
 
 .plan-button:hover::before {
-    left: 100%;
+    width: 300px;
+    height: 300px;
 }
 
 .featured-button {
@@ -831,16 +1023,20 @@ section h3 {
 .featured-button:hover {
     background: linear-gradient(45deg, var(--azul-noche), var(--azul-vino));
     color: var(--blanco);
+    transform: translateY(-5px) scale(1.05);
 }
 
+/* Pricing Benefits */
 .pricing-benefits {
     text-align: center;
     margin-top: 4rem;
+    animation: fadeInUp 1.2s ease both;
 }
 
 .pricing-benefits h3 {
     margin-bottom: 2rem;
     color: var(--azul-oscuro);
+    transition: all 0.3s ease;
 }
 
 .pricing-benefits h3::before {
@@ -849,6 +1045,12 @@ section h3 {
     font-weight: 900;
     margin-right: 0.5rem;
     color: var(--azul-vino);
+    transition: all 0.3s ease;
+}
+
+.pricing-benefits:hover h3::before {
+    transform: scale(1.2) rotate(10deg);
+    color: var(--azul-claro);
 }
 
 .benefits-grid {
@@ -862,38 +1064,60 @@ section h3 {
     padding: 2rem 1rem;
     border-radius: 15px;
     box-shadow: 0 5px 15px var(--sombra);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(107, 140, 174, 0.05), transparent); /* Reducido de 0.1 a 0.05 */
+    transition: left 0.5s ease;
 }
 
 .benefit-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.05);
     background: var(--azul-vino);
     color: var(--blanco);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.benefit-item:hover::before {
+    left: 100%;
 }
 
 .benefit-item:hover .icon {
     color: var(--blanco);
-    transform: scale(1.1);
+    transform: scale(1.2) rotate(180deg); /* Reducido de 360deg */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Reducido el brillo */
 }
 
 .benefit-item h4 {
     color: var(--azul-vino);
     margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .benefit-item:hover h4 {
     color: var(--blanco);
+    transform: scale(1.1);
 }
 
 .benefit-item p {
     color: var(--gris-frio);
     font-size: 0.9rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .benefit-item:hover p {
     color: var(--gris-claro);
+    transform: scale(1.05);
 }
 
 /* Testimonials */
@@ -1218,6 +1442,39 @@ section h3 {
     margin-bottom: 0.5rem;
 }
 
+/* Animaciones personalizadas con efectos reducidos */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; } /* Reducido de 0.5 a 0.3 */
+    50% { transform: scale(1.05); opacity: 0.2; } /* Reducido de 1.1 a 1.05 y de 0.3 a 0.2 */
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); } /* Reducido de 1.2 a 1.1 */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .mobile-menu-toggle {
@@ -1304,6 +1561,25 @@ section h3 {
         flex-direction: column;
         text-align: center;
     }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+        margin: 1rem 0;
+    }
+    
+    .pricing-card.featured:hover {
+        transform: translateY(-15px) scale(1.02);
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1346,7 +1622,7 @@ section h3 {
     }
     
     .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
     
@@ -1362,10 +1638,6 @@ section h3 {
         grid-template-columns: 1fr;
     }
     
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .card-header {
         padding: 1.5rem 1rem 1rem;
     }
@@ -1377,20 +1649,13 @@ section h3 {
     .card-footer {
         padding: 1.5rem 1rem;
     }
+
+    .amount {
+        font-size: 3rem;
+    }
 }
 
 /* Animations and transitions */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .hero-content,
 .about-intro,
 .value-item,
@@ -1930,7 +2195,7 @@ select:focus {
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/logo.png" alt="Logo BusPay" class="footer-logo">
+                    <img src="assets/logo_blanco.png" alt="Logo BusPay" class="footer-logo">
                     <h3>BusPay</h3>
                     <p>Modernizando el transporte público en Lima</p>
                     <div style="margin-top: 1rem;">
@@ -1992,7 +2257,7 @@ select:focus {
             
             <div class="footer-bottom">
                 <p>&copy; 2025 BusPay - Instituto de Educación Superior en Tecnología Digital. Todos los derechos reservados.</p>
-                <p>Desarrollado por: Angelo Quispe, Jeremías Coronel, Andy Mallcco, Abigail Ticlavilca y Rosa López | Asesor: Miluska Horna</p>
+                <p>Desarrollado por: Adrian Nuñuvero Ochoa, Angelo Quispe, Jeremías Coronel, Andy Mallcco, Abigail Ticlavilca y Rosa López | Asesor: Miluska Horna</p>
             </div>
         </div>
     </footer>
