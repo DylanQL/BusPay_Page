@@ -18,7 +18,6 @@
     
     <!-- Iconos profesionales -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css">
     
     <style>
 /* CSS Variables - Paleta de colores BusPay */
@@ -34,6 +33,11 @@
     --gris-claro: #F8F9FA;
     --sombra: rgba(0, 29, 71, 0.1);
     --sombra-hover: rgba(0, 29, 71, 0.2);
+    
+    /* Variables responsivas */
+    --container-padding: 20px;
+    --section-padding: 80px 0;
+    --grid-gap: 2rem;
 }
 
 /* Reset y estilos base */
@@ -43,22 +47,36 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--azul-oscuro);
     background-color: var(--blanco);
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--container-padding);
+    width: 100%;
 }
+
+/* Utility classes para responsividad */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.hidden { display: none; }
+.visible { display: block; }
 
 /* Estilos para iconos profesionales */
 .icon {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 1rem;
     display: inline-block;
     color: var(--azul-vino);
@@ -66,18 +84,18 @@ body {
 }
 
 .icon-large {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
 }
 
 .icon-small {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .icon-white {
     color: var(--blanco);
 }
 
-/* Header */
+/* Header - Mejorado para responsividad */
 .header {
     background: var(--blanco);
     box-shadow: 0 2px 10px var(--sombra);
@@ -93,39 +111,55 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    padding: 1rem var(--container-padding);
+    position: relative;
 }
 
 .nav-brand {
     display: flex;
     align-items: center;
     gap: 10px;
+    z-index: 1001;
 }
 
 .logo {
-    height: 40px;
+    height: clamp(35px, 5vw, 40px);
     width: auto;
 }
 
 .brand-name {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: bold;
     color: var(--azul-oscuro);
+}
+
+.nav-menu {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
 }
 
 .nav-menu ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-menu a {
     text-decoration: none;
     color: var(--azul-noche);
     font-weight: 500;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     transition: color 0.3s ease;
     position: relative;
+    padding: 0.5rem 0;
 }
 
 .nav-menu a:hover {
@@ -135,7 +169,7 @@ body {
 .nav-menu a::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
     width: 0;
     height: 2px;
@@ -152,6 +186,7 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    z-index: 1001;
 }
 
 .mobile-menu-toggle span {
@@ -159,49 +194,58 @@ body {
     height: 3px;
     background: var(--azul-oscuro);
     transition: all 0.3s ease;
+    border-radius: 2px;
 }
 
-/* Hero Section */
+/* Hero Section - Completamente responsivo */
 .hero {
     background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-noche) 100%);
     color: var(--blanco);
-    padding: 120px 0 80px;
-    margin-top: 70px;
+    padding: clamp(100px, 15vh, 120px) 0 clamp(60px, 10vh, 80px);
+    margin-top: clamp(60px, 8vh, 70px);
     overflow: hidden;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
 }
 
 .hero .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: clamp(2rem, 5vw, 3rem);
     align-items: center;
+    width: 100%;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: bold;
     margin-bottom: 1rem;
     line-height: 1.2;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     margin-bottom: 2rem;
     color: var(--gris-claro);
+    line-height: 1.6;
 }
 
 .cta-button {
     display: inline-block;
     background: linear-gradient(45deg, var(--azul-vino), var(--azul-claro));
     color: var(--blanco);
-    padding: 15px 30px;
+    padding: clamp(12px, 3vw, 15px) clamp(25px, 5vw, 30px);
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px var(--sombra);
     position: relative;
     overflow: hidden;
+    text-align: center;
+    min-width: fit-content;
 }
 
 .cta-button::before {
@@ -226,24 +270,26 @@ body {
 }
 
 .cta-button.large {
-    padding: 20px 40px;
-    font-size: 1.1rem;
+    padding: clamp(15px, 4vw, 20px) clamp(30px, 6vw, 40px);
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 .hero-visual {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .phone-mockup {
     display: inline-block;
     background: var(--blanco);
     border-radius: 35px;
-    padding: 10px;
+    padding: clamp(8px, 1.5vw, 10px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     position: relative;
-    max-width: 50%;
+    max-width: clamp(200px, 40vw, 300px);
+    width: 100%;
 }
 
 .app-screen {
@@ -254,28 +300,30 @@ body {
 }
 
 .app-screenshot {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 25px;
     display: block;
 }
 
-/* Sections General */
+/* Sections General - Responsividad mejorada */
 section {
-    padding: 80px 0;
+    padding: var(--section-padding);
 }
 
 section h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
     color: var(--azul-oscuro);
+    line-height: 1.2;
 }
 
 section h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     margin-bottom: 1rem;
     color: var(--azul-noche);
+    line-height: 1.3;
 }
 
 /* About Section */
@@ -285,24 +333,25 @@ section h3 {
 
 .about-grid {
     display: grid;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    gap: var(--grid-gap);
+    margin-bottom: var(--grid-gap);
 }
 
 .about-intro {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    line-height: 1.6;
 }
 
 .mission-vision {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--grid-gap);
 }
 
 .mission, .vision, .objective {
     background: var(--blanco);
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     border-radius: 15px;
     box-shadow: 0 5px 15px var(--sombra);
     text-align: center;
@@ -327,13 +376,13 @@ section h3 {
 
 .values-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(1rem, 3vw, 1.5rem);
 }
 
 .value-item {
     background: var(--blanco);
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     border-radius: 10px;
     box-shadow: 0 3px 10px var(--sombra);
     text-align: center;
@@ -356,10 +405,16 @@ section h3 {
     color: var(--azul-vino);
     margin-bottom: 0.5rem;
     transition: color 0.3s ease;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 .value-item:hover h4 {
     color: var(--blanco);
+}
+
+.value-item p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.5;
 }
 
 /* Value Proposition */
@@ -370,12 +425,12 @@ section h3 {
 .proposition-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    gap: var(--grid-gap);
 }
 
 .proposition-item {
     text-align: center;
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     background: var(--gris-claro);
     border-radius: 15px;
     transition: all 0.3s ease;
@@ -393,6 +448,14 @@ section h3 {
     transform: scale(1.1);
 }
 
+.proposition-item h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+}
+
+.proposition-item p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
 /* Products */
 .products {
     background: var(--gris-claro);
@@ -400,13 +463,13 @@ section h3 {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--grid-gap);
 }
 
 .product-item {
     background: var(--blanco);
-    padding: 3rem;
+    padding: clamp(2rem, 5vw, 3rem);
     border-radius: 20px;
     box-shadow: 0 10px 30px var(--sombra);
     text-align: center;
@@ -434,6 +497,7 @@ section h3 {
     border-bottom: 1px solid var(--gris-claro);
     position: relative;
     padding-left: 2rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .product-item li::before {
@@ -454,12 +518,12 @@ section h3 {
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: var(--grid-gap);
 }
 
 .feature-item {
     text-align: center;
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     background: var(--gris-claro);
     border-radius: 15px;
     transition: all 0.3s ease;
@@ -476,6 +540,14 @@ section h3 {
     transform: scale(1.1);
 }
 
+.feature-item h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+}
+
+.feature-item p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
 /* How it Works */
 .how-it-works {
     background: var(--gris-claro);
@@ -483,8 +555,8 @@ section h3 {
 
 .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--grid-gap);
 }
 
 .step {
@@ -496,8 +568,8 @@ section h3 {
 .step-number {
     background: var(--azul-vino);
     color: var(--blanco);
-    width: 40px;
-    height: 40px;
+    width: clamp(35px, 8vw, 40px);
+    height: clamp(35px, 8vw, 40px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -505,6 +577,7 @@ section h3 {
     font-weight: bold;
     flex-shrink: 0;
     transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .step:hover .step-number {
@@ -514,7 +587,7 @@ section h3 {
 
 .step-content {
     background: var(--blanco);
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     border-radius: 10px;
     box-shadow: 0 3px 10px var(--sombra);
     flex: 1;
@@ -526,6 +599,14 @@ section h3 {
     box-shadow: 0 8px 20px var(--sombra-hover);
 }
 
+.step-content h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+}
+
+.step-content p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
 /* Cards Gallery */
 .cards-gallery {
     background: var(--blanco);
@@ -534,14 +615,14 @@ section h3 {
 
 .cards-gallery p {
     margin-bottom: 3rem;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     color: var(--gris-frio);
 }
 
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: var(--grid-gap);
 }
 
 .card-mockup {
@@ -550,9 +631,9 @@ section h3 {
 
 .card-design {
     width: 100%;
-    height: 160px;
+    height: clamp(140px, 20vw, 160px);
     border-radius: 15px;
-    padding: 20px;
+    padding: clamp(15px, 3vw, 20px);
     color: var(--blanco);
     display: flex;
     flex-direction: column;
@@ -571,7 +652,7 @@ section h3 {
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     content: '\f09d';
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     opacity: 0.3;
 }
 
@@ -597,27 +678,27 @@ section h3 {
 
 .card-logo {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
 }
 
 .card-number {
     font-family: 'Courier New', monospace;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     letter-spacing: 2px;
 }
 
 .card-name {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
     opacity: 0.9;
 }
 
-/* PRICING CON ANIMACIONES AVANZADAS Y AJUSTES */
+/* PRICING - Completamente responsivo */
 .pricing {
     background: var(--gris-claro);
 }
 
 .pricing h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     text-align: center;
     margin-bottom: 1rem;
     color: var(--azul-oscuro);
@@ -626,18 +707,17 @@ section h3 {
 
 .pricing-subtitle {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: var(--gris-frio);
     margin-bottom: 3rem;
     margin-top: -1rem;
     animation: fadeInDown 0.8s ease 0.2s both;
 }
 
-/* Pricing Highlight con animaciones mejoradas y efectos reducidos */
 .pricing-highlight {
     background: linear-gradient(135deg, var(--azul-vino), var(--azul-claro));
     color: var(--blanco);
-    padding: 3rem 2rem;
+    padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2rem);
     border-radius: 20px;
     text-align: center;
     margin-bottom: 4rem;
@@ -666,23 +746,14 @@ section h3 {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.pricing-highlight:hover::before {
-    animation: pulse 2s infinite;
-    background: rgba(255, 255, 255, 0.2);
+.pricing-highlight h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 1rem;
 }
 
-.pricing-highlight:hover .icon {
-    transform: rotate(180deg) scale(1.1); /* Reducido de 360deg */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Reducido el brillo */
-}
-
-.pricing-highlight:hover h3 {
-    transform: scale(1.05);
-}
-
-.pricing-highlight:hover .offer-label {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.3);
+.pricing-highlight p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: 1rem;
 }
 
 .offer-label {
@@ -690,22 +761,20 @@ section h3 {
     background: rgba(255, 255, 255, 0.2);
     padding: 0.5rem 1rem;
     border-radius: 25px;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     font-weight: bold;
     margin-top: 1rem;
     border: 2px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
 }
 
-/* Grid de precios */
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--grid-gap);
     margin-bottom: 4rem;
 }
 
-/* Cards de precios con animaciones avanzadas y efectos reducidos */
 .pricing-card {
     background: var(--blanco);
     border-radius: 25px;
@@ -729,7 +798,7 @@ section h3 {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); /* Reducido de 0.4 a 0.2 */
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.5s ease;
 }
 
@@ -743,7 +812,6 @@ section h3 {
     left: 100%;
 }
 
-/* Featured card especial con espaciado mejorado */
 .pricing-card.featured {
     transform: scale(1.05);
     border: 3px solid var(--azul-vino);
@@ -756,33 +824,26 @@ section h3 {
     box-shadow: 0 35px 70px var(--sombra-hover);
 }
 
-/* Ajustes para espaciado en la card "Más Popular" */
 .pricing-card.featured .card-header {
-    padding: 2.5rem 2rem 1rem; /* Más espacio arriba para el badge */
+    padding: clamp(2rem, 5vw, 2.5rem) clamp(1.5rem, 4vw, 2rem) 1rem;
     border-bottom: 1px solid var(--gris-claro);
     transition: all 0.3s ease;
 }
 
-.pricing-card.featured .icon {
-    margin-top: 1rem; /* Espacio adicional entre el badge y el icono */
-    margin-bottom: 1rem;
-}
-
-/* Badge "Más Popular" con mejor posicionamiento */
 .featured-badge {
     position: absolute;
-    top: -12px; /* Ajustado para mejor posición */
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(45deg, var(--azul-vino), var(--azul-claro));
     color: var(--blanco);
     padding: 0.7rem 2rem;
     border-radius: 25px;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     font-weight: bold;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    z-index: 10; /* Asegurar que esté por encima */
+    z-index: 10;
 }
 
 .pricing-card.featured:hover .featured-badge {
@@ -798,16 +859,14 @@ section h3 {
     animation: sparkle 2s infinite;
 }
 
-/* Iconos con animaciones reducidas en pricing */
 .pricing-card:hover .icon {
-    transform: scale(1.1) rotateY(180deg); /* Reducido de 360deg a 180deg */
+    transform: scale(1.1) rotateY(180deg);
     color: var(--azul-claro);
-    text-shadow: 0 0 5px rgba(107, 140, 174, 0.3); /* Reducido el brillo */
+    text-shadow: 0 0 5px rgba(107, 140, 174, 0.3);
 }
 
-/* Headers de cards */
 .card-header {
-    padding: 2rem 2rem 1rem;
+    padding: clamp(1.5rem, 4vw, 2rem) clamp(1.5rem, 4vw, 2rem) 1rem;
     border-bottom: 1px solid var(--gris-claro);
     transition: all 0.3s ease;
 }
@@ -818,7 +877,7 @@ section h3 {
 
 .plan-description {
     color: var(--gris-frio);
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     margin-top: 0.5rem;
     transition: all 0.3s ease;
 }
@@ -828,9 +887,8 @@ section h3 {
     transform: scale(1.05);
 }
 
-/* Precios con animaciones */
 .price {
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     transition: all 0.3s ease;
 }
 
@@ -839,13 +897,13 @@ section h3 {
 }
 
 .currency {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     vertical-align: top;
     transition: all 0.3s ease;
 }
 
 .amount {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
     font-weight: bold;
     color: var(--azul-vino);
     transition: all 0.3s ease;
@@ -853,14 +911,14 @@ section h3 {
 
 .pricing-card:hover .amount {
     color: var(--azul-claro);
-    text-shadow: 0 0 5px rgba(107, 140, 174, 0.2); /* Reducido el brillo */
+    text-shadow: 0 0 5px rgba(107, 140, 174, 0.2);
 }
 
 .period {
     display: block;
     color: var(--gris-frio);
     margin-top: 0.5rem;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     transition: all 0.3s ease;
 }
 
@@ -868,38 +926,32 @@ section h3 {
     color: var(--azul-vino);
 }
 
-/* Contact sin fondo */
 .contact {
     color: var(--azul-vino) !important;
-    font-size: 1.8rem;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
     font-weight: bold;
     transition: all 0.3s ease;
-    background: none !important; /* Quita cualquier fondo */
-    padding: 0 !important; /* Quita cualquier padding */
+    background: none !important;
+    padding: 0 !important;
 }
 
-/* Asegurar que el h2 sea blanco */
 .contact h2 {
     color: var(--blanco) !important;
 }
 
-/* Asegurar que el párrafo sea blanco */
 .contact p {
     color: var(--blanco) !important;
 }
 
-/* Si hay algún override, forzar el background */
 #contacto {
     background: var(--azul-oscuro) !important;
 }
 
-/* Para el contenedor también */
 .contact .container {
     position: relative;
     z-index: 1;
 }
 
-/* Asegurar que no haya conflictos con otros estilos */
 section.contact {
     background: var(--azul-oscuro) !important;
     background-color: var(--azul-oscuro) !important;
@@ -908,7 +960,7 @@ section.contact {
 .pricing-card:hover .contact {
     color: var(--azul-claro);
     transform: scale(1.1);
-    background: none !important; /* Asegura que no tenga fondo en hover */
+    background: none !important;
 }
 
 .price .contact {
@@ -921,11 +973,10 @@ section.contact {
     background: none;
 }
 
-/* Features list con animaciones */
 .features-list {
     list-style: none;
     text-align: left;
-    padding: 0 2rem;
+    padding: 0 clamp(1rem, 3vw, 2rem);
     margin-bottom: 2rem;
 }
 
@@ -937,6 +988,7 @@ section.contact {
     gap: 0.5rem;
     transition: all 0.3s ease;
     transform: translateX(0);
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .pricing-card:hover .features-list li {
@@ -969,19 +1021,19 @@ section.contact {
     transform: scale(1.2);
 }
 
-/* Botones con efectos avanzados */
 .card-footer {
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
 }
 
 .plan-button {
     display: inline-block;
     background: var(--azul-vino);
     color: var(--blanco);
-    padding: 1rem 2rem;
+    padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.5rem, 4vw, 2rem);
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     transition: all 0.4s ease;
     width: 100%;
     text-align: center;
@@ -1026,7 +1078,6 @@ section.contact {
     transform: translateY(-5px) scale(1.05);
 }
 
-/* Pricing Benefits */
 .pricing-benefits {
     text-align: center;
     margin-top: 4rem;
@@ -1037,6 +1088,7 @@ section.contact {
     margin-bottom: 2rem;
     color: var(--azul-oscuro);
     transition: all 0.3s ease;
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
 }
 
 .pricing-benefits h3::before {
@@ -1056,12 +1108,12 @@ section.contact {
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    gap: var(--grid-gap);
 }
 
 .benefit-item {
     background: var(--blanco);
-    padding: 2rem 1rem;
+    padding: clamp(1.5rem, 4vw, 2rem) clamp(0.8rem, 2vw, 1rem);
     border-radius: 15px;
     box-shadow: 0 5px 15px var(--sombra);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1077,7 +1129,7 @@ section.contact {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(107, 140, 174, 0.05), transparent); /* Reducido de 0.1 a 0.05 */
+    background: linear-gradient(90deg, transparent, rgba(107, 140, 174, 0.05), transparent);
     transition: left 0.5s ease;
 }
 
@@ -1094,14 +1146,15 @@ section.contact {
 
 .benefit-item:hover .icon {
     color: var(--blanco);
-    transform: scale(1.2) rotate(180deg); /* Reducido de 360deg */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Reducido el brillo */
+    transform: scale(1.2) rotate(180deg);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .benefit-item h4 {
     color: var(--azul-vino);
     margin-bottom: 0.5rem;
     transition: all 0.3s ease;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 .benefit-item:hover h4 {
@@ -1111,7 +1164,7 @@ section.contact {
 
 .benefit-item p {
     color: var(--gris-frio);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     transition: all 0.3s ease;
 }
 
@@ -1128,12 +1181,12 @@ section.contact {
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: var(--grid-gap);
 }
 
 .testimonial {
     background: var(--gris-claro);
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     border-radius: 15px;
     box-shadow: 0 5px 15px var(--sombra);
     position: relative;
@@ -1147,7 +1200,7 @@ section.contact {
     position: absolute;
     top: -10px;
     left: 20px;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--azul-vino);
     background: var(--gris-claro);
     padding: 0.5rem;
@@ -1164,6 +1217,7 @@ section.contact {
     margin-bottom: 1rem;
     line-height: 1.6;
     margin-top: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .testimonial-author {
@@ -1173,11 +1227,12 @@ section.contact {
 .testimonial-author strong {
     display: block;
     color: var(--azul-oscuro);
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 .testimonial-author span {
     color: var(--gris-frio);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
 /* Contact */
@@ -1189,21 +1244,27 @@ section.contact {
 
 .contact h2 {
     color: var(--blanco);
+    font-size: clamp(2rem, 4vw, 2.5rem);
 }
 
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: clamp(2rem, 5vw, 4rem);
     margin-top: 3rem;
     align-items: start;
 }
 
 .contact-form {
     background: var(--blanco);
-    padding: 3rem;
+    padding: clamp(2rem, 5vw, 3rem);
     border-radius: 20px;
     color: var(--azul-oscuro);
+}
+
+.contact-form h3 {
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
+    margin-bottom: 2rem;
 }
 
 .form-group {
@@ -1213,10 +1274,10 @@ section.contact {
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 15px;
+    padding: clamp(12px, 3vw, 15px);
     border: 2px solid var(--gris-claro);
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     transition: border-color 0.3s ease;
 }
 
@@ -1230,10 +1291,10 @@ section.contact {
     width: 100%;
     background: var(--azul-vino);
     color: var(--blanco);
-    padding: 15px;
+    padding: clamp(12px, 3vw, 15px);
     border: none;
     border-radius: 10px;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1267,6 +1328,7 @@ section.contact {
 
 .contact-cta p {
     margin: 2rem 0;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 .app-buttons {
@@ -1280,14 +1342,14 @@ section.contact {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 20px;
+    padding: clamp(10px, 2.5vw, 12px) clamp(15px, 4vw, 20px);
     background: var(--blanco);
     color: var(--azul-oscuro);
     text-decoration: none;
     border-radius: 10px;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px var(--sombra);
-    min-width: 180px;
+    min-width: clamp(150px, 35vw, 180px);
     position: relative;
     overflow: hidden;
 }
@@ -1314,7 +1376,7 @@ section.contact {
 }
 
 .store-logo {
-    height: 40px;
+    height: clamp(30px, 6vw, 40px);
     width: auto;
     flex-shrink: 0;
 }
@@ -1326,12 +1388,12 @@ section.contact {
 }
 
 .store-text span {
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
     color: var(--gris-frio);
 }
 
 .store-text strong {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     color: var(--azul-oscuro);
 }
 
@@ -1339,13 +1401,13 @@ section.contact {
 .footer {
     background: var(--azul-oscuro);
     color: var(--blanco);
-    padding: 3rem 0 1rem;
+    padding: clamp(2rem, 5vw, 3rem) 0 1rem;
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    gap: 3rem;
+    gap: clamp(2rem, 5vw, 3rem);
     margin-bottom: 2rem;
 }
 
@@ -1354,24 +1416,31 @@ section.contact {
 }
 
 .footer-logo {
-    height: 60px;
+    height: clamp(50px, 8vw, 60px);
     margin-bottom: 1rem;
 }
 
 .footer-brand h3 {
     margin-bottom: 1rem;
     color: var(--blanco);
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
+}
+
+.footer-brand p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 0.5rem;
 }
 
 .footer-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    gap: var(--grid-gap);
 }
 
 .footer-column h4 {
     color: var(--azul-claro);
     margin-bottom: 1rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
 }
 
 .footer-column ul {
@@ -1386,6 +1455,7 @@ section.contact {
     color: var(--gris-claro);
     text-decoration: none;
     transition: color 0.3s ease;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .footer-column a:hover {
@@ -1395,14 +1465,16 @@ section.contact {
 .social-links {
     display: flex;
     gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .social-links a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: clamp(40px, 8vw, 45px);
+    height: clamp(40px, 8vw, 45px);
     background: var(--azul-noche);
     border-radius: 50%;
     text-decoration: none;
@@ -1419,8 +1491,8 @@ section.contact {
 }
 
 .social-icon {
-    width: 24px;
-    height: 24px;
+    width: clamp(20px, 4vw, 24px);
+    height: clamp(20px, 4vw, 24px);
     object-fit: contain;
     filter: brightness(0) invert(1);
     transition: all 0.3s ease;
@@ -1440,17 +1512,18 @@ section.contact {
 
 .footer-bottom p {
     margin-bottom: 0.5rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
-/* Animaciones personalizadas con efectos reducidos */
+/* Animaciones personalizadas */
 @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.3; } /* Reducido de 0.5 a 0.3 */
-    50% { transform: scale(1.05); opacity: 0.2; } /* Reducido de 1.1 a 1.05 y de 0.3 a 0.2 */
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.2; }
 }
 
 @keyframes sparkle {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); } /* Reducido de 1.2 a 1.1 */
+    50% { transform: scale(1.1); }
 }
 
 @keyframes fadeInDown {
@@ -1475,8 +1548,37 @@ section.contact {
     }
 }
 
-/* Responsive Design */
+/* Responsive Design - Breakpoints principales */
+
+/* Tablets grandes y laptops pequeñas */
+@media (max-width: 1024px) {
+    :root {
+        --container-padding: 15px;
+        --section-padding: 60px 0;
+        --grid-gap: 1.5rem;
+    }
+    
+    .hero .container {
+        gap: 2rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-content {
+        gap: 2rem;
+    }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
+    :root {
+        --container-padding: 15px;
+        --section-padding: 50px 0;
+        --grid-gap: 1.5rem;
+    }
+    
     .mobile-menu-toggle {
         display: flex;
     }
@@ -1492,6 +1594,7 @@ section.contact {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+        z-index: 999;
     }
     
     .nav-menu.active {
@@ -1506,18 +1609,28 @@ section.contact {
         gap: 1rem;
     }
     
+    .hero {
+        margin-top: 60px;
+        padding: 80px 0 60px;
+        min-height: 60vh;
+    }
+    
     .hero .container {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
     }
     
-    .hero-content h1 {
-        font-size: 2rem;
+    .hero-content {
+        order: 1;
+    }
+    
+    .hero-visual {
+        order: 2;
     }
     
     .phone-mockup {
-        max-width: 70%;
-        padding: 8px;
+        max-width: 60%;
     }
     
     .mission-vision {
@@ -1532,10 +1645,12 @@ section.contact {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 2rem;
     }
     
     .footer-links {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
     }
     
     .app-buttons {
@@ -1545,12 +1660,8 @@ section.contact {
     }
     
     .app-button {
-        min-width: 160px;
-        padding: 10px 16px;
-    }
-    
-    .store-logo {
-        height: 35px;
+        min-width: 200px;
+        max-width: 280px;
     }
     
     .steps {
@@ -1558,8 +1669,8 @@ section.contact {
     }
     
     .step {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        text-align: left;
     }
 
     .pricing-grid {
@@ -1580,27 +1691,44 @@ section.contact {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
+    
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
+/* Móviles */
 @media (max-width: 480px) {
+    :root {
+        --container-padding: 10px;
+        --section-padding: 40px 0;
+        --grid-gap: 1rem;
+    }
+    
     .container {
-        padding: 0 15px;
+        padding: 0 var(--container-padding);
     }
     
-    section {
-        padding: 60px 0;
-    }
-    
-    section h2 {
-        font-size: 2rem;
+    .header .container {
+        padding: 0.8rem var(--container-padding);
     }
     
     .hero {
-        padding: 100px 0 60px;
+        padding: 70px 0 50px;
+        margin-top: 60px;
+        min-height: 50vh;
     }
     
-    .hero-content h1 {
-        font-size: 1.8rem;
+    .hero .container {
+        gap: 1.5rem;
+    }
+    
+    .phone-mockup {
+        max-width: 80%;
     }
     
     .cards-grid {
@@ -1609,7 +1737,7 @@ section.contact {
     
     .pricing-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
     
     .pricing-card.featured {
@@ -1626,10 +1754,6 @@ section.contact {
         gap: 1rem;
     }
     
-    .icon-large {
-        font-size: 3rem;
-    }
-    
     .testimonials-grid {
         grid-template-columns: 1fr;
     }
@@ -1638,33 +1762,116 @@ section.contact {
         grid-template-columns: 1fr;
     }
     
-    .card-header {
-        padding: 1.5rem 1rem 1rem;
+    .values-grid {
+        grid-template-columns: 1fr;
     }
     
-    .features-list {
-        padding: 0 1rem;
+    .proposition-grid {
+        grid-template-columns: 1fr;
     }
     
-    .card-footer {
-        padding: 1.5rem 1rem;
+    .features-grid {
+        grid-template-columns: 1fr;
     }
-
-    .amount {
-        font-size: 3rem;
+    
+    .step {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .step-number {
+        margin-bottom: 0.5rem;
+    }
+    
+    .app-button {
+        min-width: auto;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .social-links {
+        gap: 0.8rem;
+    }
+    
+    .featured-badge {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.8rem;
     }
 }
 
-/* Animations and transitions */
-.hero-content,
-.about-intro,
-.value-item,
-.feature-item,
-.testimonial {
-    animation: fadeInUp 0.6s ease forwards;
+/* Móviles muy pequeños */
+@media (max-width: 320px) {
+    :root {
+        --container-padding: 8px;
+        --section-padding: 30px 0;
+        --grid-gap: 0.8rem;
+    }
+    
+    .hero {
+        padding: 60px 0 40px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+    
+    .phone-mockup {
+        max-width: 90%;
+    }
+    
+    .card-design {
+        height: 120px;
+        padding: 12px;
+    }
+    
+    .app-button {
+        padding: 8px 12px;
+        min-width: auto;
+    }
+    
+    .store-logo {
+        height: 25px;
+    }
+    
+    .featured-badge {
+        padding: 0.4rem 1rem;
+        font-size: 0.7rem;
+    }
 }
 
-/* Accessibility improvements */
+/* Paisaje en móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        padding: 60px 0 40px;
+        min-height: auto;
+    }
+    
+    .hero .container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .phone-mockup {
+        max-width: 50%;
+    }
+}
+
+/* Pantallas muy grandes */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: repeat(3, minmax(350px, 1fr));
+    }
+}
+
+/* Animaciones y transiciones - Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1675,7 +1882,7 @@ section.contact {
     }
 }
 
-/* Focus styles for accessibility */
+/* Focus styles para accesibilidad */
 a:focus,
 button:focus,
 input:focus,
@@ -1684,11 +1891,18 @@ select:focus {
     outline-offset: 2px;
 }
 
-/* High contrast mode support */
+/* Alto contraste */
 @media (prefers-contrast: high) {
     :root {
         --gris-frio: #666666;
         --sombra: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+    .card-design::before {
+        opacity: 0.5;
     }
 }
     </style>
@@ -2266,6 +2480,53 @@ select:focus {
         // Mobile menu toggle
         document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-menu').classList.toggle('active');
+            
+            // Animate hamburger
+            const spans = this.querySelectorAll('span');
+            this.classList.toggle('active');
+            
+            if (this.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                const navMenu = document.querySelector('.nav-menu');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                
+                navMenu.classList.remove('active');
+                toggle.classList.remove('active');
+                
+                const spans = toggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navMenu = document.querySelector('.nav-menu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const header = document.querySelector('.header');
+            
+            if (!header.contains(e.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                toggle.classList.remove('active');
+                
+                const spans = toggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
 
         // Smooth scrolling for anchor links
@@ -2274,9 +2535,12 @@ select:focus {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -2308,18 +2572,34 @@ select:focus {
         });
 
         // Header scroll effect
+        let lastScrollTop = 0;
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
                 header.style.background = 'rgba(255, 255, 255, 0.95)';
                 header.style.backdropFilter = 'blur(10px)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 29, 71, 0.15)';
             } else {
                 header.style.background = 'var(--blanco)';
                 header.style.backdropFilter = 'none';
+                header.style.boxShadow = '0 2px 10px var(--sombra)';
             }
+            
+            // Hide/show header on scroll (optional)
+            if (window.innerWidth > 768) {
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+            }
+            
+            lastScrollTop = scrollTop;
         });
 
-        // Add scroll animations
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -2330,17 +2610,290 @@ select:focus {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    
+                    // Add staggered animation for children
+                    const children = entry.target.querySelectorAll('.value-item, .feature-item, .product-item, .benefit-item, .testimonial');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
                 }
             });
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.value-item, .feature-item, .product-item, .pricing-card, .testimonial').forEach(el => {
+        document.querySelectorAll('.about-grid, .values-grid, .proposition-grid, .products-grid, .features-grid, .steps, .cards-grid, .pricing-grid, .benefits-grid, .testimonials-grid').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
+
+        // Initialize children elements
+        document.querySelectorAll('.value-item, .feature-item, .product-item, .benefit-item, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+        });
+
+        // Lazy loading for images
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Add loading states for buttons
+        document.querySelectorAll('.cta-button, .plan-button, .submit-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.classList.contains('loading')) {
+                    this.classList.add('loading');
+                    const originalText = this.textContent;
+                    this.textContent = 'Cargando...';
+                    
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                        this.textContent = originalText;
+                    }, 2000);
+                }
+            });
+        });
+
+        // Performance optimization - Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Apply debounce to scroll handler
+        window.addEventListener('scroll', debounce(function() {
+            // Additional scroll optimizations can be added here
+        }, 10));
+
+        // Add touch support for cards
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.pricing-card, .value-item, .feature-item').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.classList.add('touch-active');
+                });
+                
+                card.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.classList.remove('touch-active');
+                    }, 150);
+                });
+            });
+        }
+
+        // Improved form validation
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            
+            // Remove existing error styles
+            field.classList.remove('error');
+            const existingError = field.parentNode.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Validate based on field type
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                showError(field, 'Este campo es obligatorio');
+            } else if (field.type === 'email' && value && !isValidEmail(value)) {
+                isValid = false;
+                showError(field, 'Ingresa un email válido');
+            } else if (field.type === 'tel' && value && !isValidPhone(value)) {
+                isValid = false;
+                showError(field, 'Ingresa un teléfono válido');
+            }
+            
+            return isValid;
+        }
+
+        function showError(field, message) {
+            field.classList.add('error');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            errorDiv.style.color = '#e74c3c';
+            errorDiv.style.fontSize = '0.8rem';
+            errorDiv.style.marginTop = '0.25rem';
+            field.parentNode.appendChild(errorDiv);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{7,}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Add CSS for error states and loading states
+        const additionalStyles = `
+            <style>
+                .error {
+                    border-color: #e74c3c !important;
+                    box-shadow: 0 0 5px rgba(231, 76, 60, 0.3) !important;
+                }
+                
+                .loading {
+                    opacity: 0.7;
+                    pointer-events: none;
+                    position: relative;
+                }
+                
+                .loading::after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: 15px;
+                    width: 15px;
+                    height: 15px;
+                    border: 2px solid transparent;
+                    border-top: 2px solid currentColor;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                    transform: translateY(-50%);
+                }
+                
+                @keyframes spin {
+                    0% { transform: translateY(-50%) rotate(0deg); }
+                    100% { transform: translateY(-50%) rotate(360deg); }
+                }
+                
+                .touch-active {
+                    transform: scale(0.98) !important;
+                }
+                
+                .lazy {
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+                
+                /* Improved focus styles for accessibility */
+                .cta-button:focus,
+                .plan-button:focus,
+                .submit-btn:focus {
+                    outline: 2px solid var(--azul-vino);
+                    outline-offset: 2px;
+                }
+                
+                /* Print styles */
+                @media print {
+                    .header,
+                    .mobile-menu-toggle,
+                    .contact,
+                    .footer {
+                        display: none !important;
+                    }
+                    
+                    * {
+                        background: white !important;
+                        color: black !important;
+                        box-shadow: none !important;
+                    }
+                }
+                
+                /* High contrast mode improvements */
+                @media (prefers-contrast: high) {
+                    .pricing-card {
+                        border: 2px solid var(--azul-oscuro);
+                    }
+                    
+                    .cta-button,
+                    .plan-button {
+                        border: 2px solid var(--azul-oscuro);
+                    }
+                }
+                
+                /* Reduced motion preferences */
+                @media (prefers-reduced-motion: reduce) {
+                    .pricing-card:hover,
+                    .value-item:hover,
+                    .feature-item:hover {
+                        transform: none !important;
+                    }
+                    
+                    .hero-content,
+                    .about-grid,
+                    .values-grid {
+                        animation: none !important;
+                    }
+                }
+            </style>
+        `;
+        
+        document.head.insertAdjacentHTML('beforeend', additionalStyles);
+
+        // Initialize tooltips for accessibility
+        document.querySelectorAll('[title]').forEach(element => {
+            element.setAttribute('aria-label', element.title);
+        });
+
+        // Add keyboard navigation for mobile menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const navMenu = document.querySelector('.nav-menu');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    toggle.classList.remove('active');
+                    toggle.focus();
+                }
+            }
+        });
+
+        // Preload critical images
+        const criticalImages = [
+            'assets/logo.png',
+            'assets/app_pantalla.png'
+        ];
+        
+        criticalImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        console.log('BusPay website loaded successfully! 🚀');
     </script>
 </body>
 </html>
